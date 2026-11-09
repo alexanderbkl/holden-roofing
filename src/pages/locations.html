@@ -1,0 +1,37 @@
+<!--
+title: Texas Roofing Locations & Service Areas | Holden Roofing
+description: Seven Texas offices — Houston/Rosenberg, Spring, Austin, San Antonio, San Marcos, Temple and Dallas. Find your local Holden Roofing office, phone number, directions and service area.
+nav: locations
+-->
+<section class="page-hero">
+  <div class="page-hero__media"><img src="assets/img/neighborhood-1200.webp" alt="" width="1200" height="675" fetchpriority="high"></div>
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Locations</span></nav>
+    <span class="eyebrow">Locations</span>
+    <h1>Seven offices. Texas&#8209;sized coverage.</h1>
+    <p class="lead">With 7 locations across Texas and more than 100,000 roofs replaced since 1961, there’s a Holden Roofing team close to you. Toll free: <a href="tel:{{tel}}" style="font-weight:700;text-decoration:none">{{phone}}</a>.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Find your office</span><h2>Pick a pin, <em class="accent">get directions.</em></h2></div>
+    {{locator}}
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Every office</span><h2>Call or visit your local team.</h2></div>
+    <div class="office-cards">{{office_cards}}</div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Service areas</span><h2>Communities we serve around Houston and Austin.</h2><p class="lead">Don’t see your town? Call us — our service area is bigger than this list.</p></div>
+    <div class="cols-2" style="gap:48px">{{service_areas}}</div>
+  </div>
+</section>
+
+{{cta}}

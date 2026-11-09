@@ -1,4 +1,4 @@
-"""Create a locally navigable mirror of robinsonroofing.homes using the stdlib.
+"""Create a locally navigable mirror of holdenroofing.com using the stdlib.
 
 Usage: python scripts/clone_site.py
 Output: ./clone/ (open clone/index.html or run `python -m http.server -d clone`)
@@ -17,7 +17,7 @@ from collections import deque
 from html.parser import HTMLParser
 from urllib.parse import quote, urljoin, urldefrag, urlsplit, unquote
 
-ROOT = "https://robinsonroofing.homes/"
+ROOT = "https://holdenroofing.com/"
 SITE_HOST = urlsplit(ROOT).hostname.lower()
 SITE_HOSTS = {SITE_HOST, "www." + SITE_HOST}
 OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "clone")
@@ -161,25 +161,32 @@ def extract_references(text, base, content_type, is_html, is_css, is_js, is_xml)
     return references
 
 
+SKIP_PATH_RE = re.compile(
+    r"^/(wp-json|xmlrpc\.php|wp-login\.php|wp-admin|wp-cron\.php|cart|checkout|my-account|new-cart|shop)(/|$)"
+    r"|/feed/?$|/embed/?$|/trackback/?$|/comments/",
+    re.I,
+)
+SKIP_QUERY_RE = re.compile(r"(^|&)(s|replytocom|add-to-cart|p|page_id|format|url|rest_route)=", re.I)
+
+
+def should_skip(url):
+    parsed = urlsplit(url)
+    if not is_site_url(url):
+        return False
+    return bool(SKIP_PATH_RE.search(parsed.path) or SKIP_QUERY_RE.search(parsed.query))
+
+
 def alternate_urls(url, error):
     if not is_site_url(url) or not isinstance(error, urllib.error.HTTPError):
         return []
-    parsed = urlsplit(url)
-    alternatives = []
-    path = unquote(parsed.path)
+    path = unquote(urlsplit(url).path)
     if error.code == 404 and path != "/" and not posixpath.splitext(path)[1] and not path.endswith("/"):
-        alternatives.append(url.rstrip("/") + "/")
-    if error.code == 403 and "/wp-content/uploads/" in path:
-        filename = posixpath.basename(path)
-        city = path.split("/wp-content/uploads/", 1)[0].strip("/")
-        alternatives.append(urljoin(ROOT, "media/" + filename))
-        if city:
-            alternatives.append(urljoin(ROOT, city + "/images/" + filename))
-    return [candidate for candidate in alternatives if normalize(candidate)]
-
+        return [url.rstrip("/") + "/"]
+    return []
 
 def crawl():
-    queue = deque([normalize(ROOT), normalize(urljoin(ROOT, "robots.txt"))])
+    queue = deque([normalize(ROOT), normalize(urljoin(ROOT, "robots.txt")),
+                   normalize(urljoin(ROOT, "sitemap_index.xml"))])
     seen = set(queue)
     texts = {}
 
@@ -232,14 +239,16 @@ def crawl():
         text, encoding = decode(data, content_type)
         if is_html or is_css or is_js:
             texts[path] = (final_url, encoding, is_css, is_js)
+        if is_js and not is_site_url(final_url):
+            continue
         for reference, asset_only in extract_references(
                 text, final_url, content_type, is_html, is_css, is_js, is_xml):
             reference = reference.strip()
-            if not reference or reference.startswith(
+            if not reference or re.search(r"[\\\",\s]", reference) or reference.startswith(
                     ("data:", "mailto:", "tel:", "javascript:", "#", "blob:")):
                 continue
             target = normalize(urljoin(final_url, reference))
-            if not target or target in seen:
+            if not target or target in seen or should_skip(target):
                 continue
             if is_site_url(target) or asset_only:
                 seen.add(target)

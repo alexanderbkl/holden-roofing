@@ -1,0 +1,60 @@
+<!--
+title: Contact Holden Roofing | Free Roof Inspection in Texas
+description: Request your free roof inspection or call Holden Roofing toll free at 888.553.1318. Offices in Houston/Rosenberg, Spring, Austin, San Antonio, San Marcos, Temple and Dallas.
+nav: contact
+-->
+<section class="page-hero page-hero--plain pattern">
+  <div class="container">
+    <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Contact</span></nav>
+    <span class="eyebrow">Contact us</span>
+    <h1>Let’s take a look at your roof.</h1>
+    <p class="lead">Our phones are always answered by a Holden Roofing representative — not an outside answering service. Call today or send a request for your free roof inspection.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container contact-grid">
+    <div class="contact-cards reveal reveal--left">
+      <a class="contact-card" href="tel:{{tel}}"><span class="ico">{{i:phone}}</span><div><h3>Toll free</h3><strong>{{phone}}</strong><p>Talk to a real person, not an answering service.</p></div></a>
+      <a class="contact-card" href="tel:+12813449083"><span class="ico">{{i:pin}}</span><div><h3>Houston main office</h3><strong>(281) 344-9083</strong><p>2128 1st Street, Rosenberg, TX 77471</p></div></a>
+      <a class="contact-card" href="mailto:recruiting@holdenroofing.com"><span class="ico">{{i:users}}</span><div><h3>Careers</h3><strong>recruiting@holdenroofing.com</strong><p>Join one of Texas’s largest roofing teams.</p></div></a>
+      <a class="contact-card" href="{{pay_url}}" target="_blank" rel="noopener"><span class="ico">{{i:dollar}}</span><div><h3>Make a payment</h3><strong>Pay online</strong><p>Secure customer payment portal.</p></div></a>
+      <a class="contact-card" href="locations.html"><span class="ico">{{i:clock}}</span><div><h3>Find your local office</h3><strong>7 Texas locations</strong><p>Addresses, phone numbers and directions.</p></div></a>
+    </div>
+    <form class="form reveal reveal--right" data-quote-form novalidate>
+      <h3>Request your free roof inspection</h3>
+      <p>Tell us a little about your project and we’ll get back to you.</p>
+      <div class="row row--2">
+        <div class="field"><label for="c-name">Full name</label><input id="c-name" name="name" autocomplete="name" required placeholder="Jane Smith"></div>
+        <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="(555) 555-5555"></div>
+      </div>
+      <div class="row row--2">
+        <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email" placeholder="you@email.com"></div>
+        <div class="field"><label for="c-zip">ZIP code</label><input id="c-zip" name="zip" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="77471"></div>
+      </div>
+      <div class="field"><label for="c-office">Nearest office</label>
+        <select id="c-office" name="office"><option value="">No preference</option><option>Houston / Rosenberg</option><option>Spring</option><option>Austin</option><option>San Antonio</option><option>San Marcos</option><option>Temple</option><option>Dallas</option></select>
+      </div>
+      <fieldset class="field"><legend>I need help with</legend>
+        <div class="choices">
+          <label><input type="radio" name="service" value="Residential roofing" checked><span>Residential</span></label>
+          <label><input type="radio" name="service" value="Commercial roofing"><span>Commercial</span></label>
+          <label><input type="radio" name="service" value="Storm damage repair"><span>Storm damage</span></label>
+          <label><input type="radio" name="service" value="Financing"><span>Financing</span></label>
+        </div>
+      </fieldset>
+      <div class="field"><label for="c-msg">Message <span style="font-weight:400;color:var(--muted)">(optional)</span></label><textarea id="c-msg" name="message" placeholder="Tell us about leaks, storm damage, timeline…"></textarea></div>
+      <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn btn--primary btn--lg btn--block" type="submit">Send my request {{i:arrow}}</button>
+      <p class="form__status" role="status" data-status></p>
+      <p class="form__note">No obligation. We never sell or rent your information. See our <a href="privacy.html" style="color:var(--red)">privacy policy</a>.</p>
+    </form>
+  </div>
+</section>
+
+<section class="section section--white">
+  <div class="container">
+    <div class="section-head reveal"><span class="eyebrow">Locations</span><h2>Prefer to stop by or call your local office?</h2></div>
+    <div class="office-cards">{{office_cards}}</div>
+  </div>
+</section>

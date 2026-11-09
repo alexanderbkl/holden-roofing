@@ -1,0 +1,39 @@
+<section class="cta" id="quote">
+  <div class="cta__bg"><img src="assets/img/neighborhood-1200.webp" alt="" width="1200" height="675" loading="lazy" decoding="async"></div>
+  <div class="container section cta__grid">
+    <div class="reveal reveal--left">
+      <span class="eyebrow">Free roof inspection</span>
+      <h2>Know exactly what your roof needs. <em class="accent">No pressure.</em></h2>
+      <p class="lead" style="max-width:46ch">We’ll come out, document what we find, and explain your options in plain language — whether that’s a small repair or a full replacement.</p>
+      <a class="cta__phone" href="tel:{{tel}}"><span class="ico">{{i:phone}}</span>{{phone}}</a>
+      <div class="badge-row on-dark" style="margin-top:28px">
+        <span class="badge">{{i:shield}} Fully insured</span>
+        <span class="badge">{{i:award}} Owens Corning Platinum Preferred</span>
+        <span class="badge">{{i:users}} Family-owned since 1961</span>
+      </div>
+    </div>
+    <form class="form reveal reveal--right" data-quote-form novalidate>
+      <h3>Book your free inspection</h3>
+      <p>Tell us where you are and we’ll call you back — usually the same business day.</p>
+      <div class="row row--2">
+        <div class="field"><label for="q-name">Full name</label><input id="q-name" name="name" autocomplete="name" required placeholder="Jane Smith"></div>
+        <div class="field"><label for="q-phone">Phone</label><input id="q-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required placeholder="(555) 555-5555"></div>
+      </div>
+      <div class="row row--2">
+        <div class="field"><label for="q-zip">ZIP code</label><input id="q-zip" name="zip" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required placeholder="77471"></div>
+        <div class="field"><label for="q-email">Email <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="q-email" name="email" type="email" autocomplete="email" placeholder="you@email.com"></div>
+      </div>
+      <fieldset class="field"><legend>I need help with</legend>
+        <div class="choices">
+          <label><input type="radio" name="service" value="Residential roofing" checked><span>Residential</span></label>
+          <label><input type="radio" name="service" value="Commercial roofing"><span>Commercial</span></label>
+          <label><input type="radio" name="service" value="Storm damage repair"><span>Storm damage</span></label>
+        </div>
+      </fieldset>
+      <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button class="btn btn--primary btn--lg btn--block" type="submit">Request my free inspection {{i:arrow}}</button>
+      <p class="form__status" role="status" data-status></p>
+      <p class="form__note">No obligation. We never sell or rent your information.</p>
+    </form>
+  </div>
+</section>

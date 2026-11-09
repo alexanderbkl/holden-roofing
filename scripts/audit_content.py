@@ -144,7 +144,7 @@ def structured_business_records(source):
                         address.get("addressRegion"),
                         address.get("postalCode"),
                     )
-                    address = ", ".join(address_parts) if any(
+                    address = ", ".join(part for part in address_parts if part) if any(
                         (address.get(key) for key in
                          ("streetAddress", "addressLocality", "postalCode"))
                     ) else ""
@@ -240,7 +240,7 @@ def main():
                 else:
                     summary["phones"].add(phone)
             for record in structured_business_records(source):
-                key = (record["name"], record["address"])
+                key = (str(record["name"]), str(record["address"]))
                 if key not in summary["business_data"]:
                     summary["business_data"][key] = {**record, "pages": set()}
                 else:
@@ -287,7 +287,7 @@ def main():
             {**record, "pages": sorted(record["pages"])}
             for record in summary["business_data"].values()
         ),
-        key=lambda record: (record["name"], record["address"]),
+        key=lambda record: (str(record["name"]), str(record["address"])),
     )
     summary["pages"].sort(key=lambda page: page["file"])
     summary["legal_pages"].sort(key=lambda page: page["file"])
